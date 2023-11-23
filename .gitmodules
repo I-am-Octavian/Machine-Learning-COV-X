@@ -1,0 +1,3 @@
+[submodule "Cov-X-core"]
+	path = Cov-X-core
+	url = https://github.com/I-am-Octavian/Cov-X-Core.git
