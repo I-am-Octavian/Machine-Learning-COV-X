@@ -37,6 +37,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   tflite_flutter: ^0.10.3
   image_picker: ^1.0.4
+  collection: ^1.18.0
+  logger: ^2.0.2+1
+  image: ^3.3.0
+  path_provider: ^2.1.1
+  tflite_flutter_helper_plus: ^0.0.2
+  
 
 dev_dependencies:
   flutter_test:
