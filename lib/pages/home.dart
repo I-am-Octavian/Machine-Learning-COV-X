@@ -1,17 +1,19 @@
-import 'dart:ffi';
+import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:math';
 
 import 'package:covx/constants/AppStyle.dart';
 import 'package:covx/widgets/card.dart';
 import 'package:covx/widgets/emptyCard.dart';
-import 'package:flutter/material.dart';
+
+import 'package:image/image.dart' as Img;
+
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite_flutter/tflite_flutter.dart' as tfl;
 import 'package:tflite_flutter_helper_plus/tflite_flutter_helper_plus.dart'
     as tflh;
+// ignore: depend_on_referenced_packages, implementation_imports
 import 'package:tflite_flutter_plus/src/bindings/types.dart';
-import 'package:image/image.dart' as Img;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,9 +29,10 @@ class _HomePageState extends State<HomePage> {
   late tflh.TensorImage _inputImage;
   late List<int> _inputShape;
   late List<int> _outputShape;
-  late List<double> output;
+  late double output;
   bool imageSelect = false;
 
+  @override
   void initState() {
     super.initState();
     loadModel();
@@ -50,8 +53,7 @@ class _HomePageState extends State<HomePage> {
     );
     _image = File(pickedFile!.path);
     Img.Image imageInput = Img.decodeImage(_image.readAsBytesSync())!;
-    ;
-    CovidClassification(imageInput);
+    covidClassification(imageInput);
   }
 
   tflh.TensorImage _preProcess() {
@@ -64,21 +66,15 @@ class _HomePageState extends State<HomePage> {
         .process(_inputImage);
   }
 
-  Future CovidClassification(Img.Image image) async {
-    print('Started processing');
+  Future covidClassification(Img.Image image) async {
     _inputImage = tflh.TensorImage(TfLiteType.float32);
     _inputImage.loadImage(image);
     _inputImage = _preProcess();
     interpreter.run(_inputImage.buffer, _outputBuffer.getBuffer());
     setState(() {
       imageSelect = true;
-      output = [
-        _outputBuffer.getBuffer().asFloat32List()[0],
-        _outputBuffer.getBuffer().asFloat32List()[1]
-      ];
+      output = _outputBuffer.getBuffer().asFloat32List()[0];
     });
-
-    print(output);
   }
 
   @override
@@ -92,17 +88,16 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: AppStyle.accentOff,
       body: imageSelect
-          ? Container(
-              height: 20,
-              width: 20,
-              color: Colors.amber,
+          ? HomeCard(
+              image: _image,
+              output: output,
             )
-          : EmptyCard(),
+          : const EmptyCard(),
       floatingActionButton: FloatingActionButton(
         onPressed: pickImage,
         backgroundColor: AppStyle.accentColor,
-        child: const Icon(Icons.add_photo_alternate_outlined),
         foregroundColor: AppStyle.textCol,
+        child: const Icon(Icons.add_photo_alternate_outlined),
       ),
     );
   }

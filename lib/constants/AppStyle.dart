@@ -7,5 +7,7 @@ class AppStyle {
   static Color accentOff = const Color(0xFFF5E8C7);
   static Color textCol = const Color.fromRGBO(187, 222, 251, 1);
   static TextStyle mainText = const TextStyle(
+      fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black);
+  static TextStyle subText = const TextStyle(
       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black);
 }

@@ -1,21 +1,35 @@
+import 'dart:io';
+
 import 'package:covx/constants/AppStyle.dart';
 import 'package:flutter/material.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({super.key});
+  final File image;
+  final double output;
+  const HomeCard({super.key, required this.image, required this.output});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      // height: 40,
-      child: Text("See Old Reports"),
-      // color: AppStyle.accentColor,
-      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: AppStyle.accentColor,
+      margin: const EdgeInsets.fromLTRB(20, 50, 20, 50),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.file(image),
+            ),
+            Text(
+              "Chances of Covid : ${("${output}0000").substring(0, 5)}",
+              style: AppStyle.subText,
+            ),
+            Text(
+              "Result : ${(output <= 0.5) ? "Covid +ve" : "Covid -ve"}",
+              style: AppStyle.mainText,
+            ),
+          ],
+        ),
       ),
     );
   }
