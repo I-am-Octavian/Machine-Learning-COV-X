@@ -1,16 +1,14 @@
-# covx
+# Cov - X
 
-A new Flutter project.
+## An easy way to detect covid 
 
-## Getting Started
+### What is Cov-X?
+#### Cov-X is and android app that allows a user to use a chest x ray to detect their chnaces of having covid
 
-This project is a starting point for a Flutter application.
+### How to use Cov-X?
+#### Just download the apk in release in your android phone , open app , add xray image and let the app do its magic , it will provide a prediction as to whether you have covid
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies used:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### TensorFlow for model
+### Flutter for mobile app
