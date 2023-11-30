@@ -21,7 +21,7 @@ class HomeCard extends StatelessWidget {
               child: Image.file(image),
             ),
             Text(
-              "Chances of Covid : ${("${output}0000").substring(0, 5)}",
+              "Chances of Covid : ${("${(1.0 - output)}0000").substring(0, 5)}",
               style: AppStyle.subText,
             ),
             Text(
